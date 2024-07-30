@@ -15,9 +15,8 @@ renderer.setAnimationLoop(animate);
 document.body.appendChild(renderer.domElement);
 
 const loader = new GLTFLoader();
-
 loader.load(
-  "/polaroid_camera.glb",
+  "/polaroid_cam/scene.gltf",
   function (gltf) {
     scene.add(gltf.scene);
   },
@@ -27,7 +26,13 @@ loader.load(
   }
 );
 
-camera.position.z = 50;
+scene.background = new THREE.Color(0x999999);
+camera.position.set(5, 5, 10);
+camera.lookAt(0, 0, 0);
+
+const light = new THREE.AmbientLight(0xffffff);
+light.intensity = 3;
+scene.add(light);
 
 function animate() {
   renderer.render(scene, camera);
